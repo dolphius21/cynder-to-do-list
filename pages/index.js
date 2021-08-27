@@ -5,6 +5,7 @@ import Input from '../components/Input';
 import Form from '../components/Form';
 import TaskList from '../components/TaskList'
 import styles from '../styles/Home.module.css'
+import Loader from '../components/Loader';
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       </Head>
       <Card>
         <Form />
+        <Loader />
         <TaskList />
       </Card>
     </div>

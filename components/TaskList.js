@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import Task from './Task'
-import tasks from '../data/data'
+import data from '../data/data'
 import styled from 'styled-components';
 
 const StyledTaskList = styled.div`
@@ -7,10 +8,16 @@ const StyledTaskList = styled.div`
 `
 
 const TaskList = () => {
+    const [tasks, setTasks] = useState(data);
+
+  
     return ( 
         <StyledTaskList>
             {tasks.map((task, index) => (
-                <Task details={task} key={index}/>
+                <Task 
+                    details={task} 
+                    key={index} 
+                />
             ))}
         </StyledTaskList>
      );
