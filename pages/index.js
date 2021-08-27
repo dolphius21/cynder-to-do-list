@@ -3,6 +3,7 @@ import Button from '../components/Button';
 import Card from '../components/Card';
 import Input from '../components/Input';
 import Form from '../components/Form';
+import TaskList from '../components/TaskList'
 import styles from '../styles/Home.module.css'
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       </Head>
       <Card>
         <Form />
+        <TaskList />
       </Card>
     </div>
 
