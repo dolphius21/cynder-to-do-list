@@ -1,8 +1,14 @@
+import { format } from 'date-fns';
+
 const Header = () => {
+  const currDate = format(new Date(), 'cccc, do LLLL');
+
   return (
     <header className="header">
-      <h2>Hello</h2>
-      <p>What's our task for today?</p>
+      <div className="text-container">
+        <h2>Welcome</h2>
+        <p>{currDate}</p>
+      </div>
     </header>
   );
 };
