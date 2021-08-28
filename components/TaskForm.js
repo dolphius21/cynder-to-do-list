@@ -33,7 +33,9 @@ const TaskForm = () => {
               Due Date
             </label>
           </div>
-          <Button className="light-btn form-btn">Add Task</Button>
+          <Button className="default-btn light-primary-btn form-btn">
+            Add Task
+          </Button>
         </div>
       </form>
     </div>

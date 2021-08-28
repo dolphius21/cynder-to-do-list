@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import TaskList from '../components/TaskList';
+import TasksList from '../components/TasksList';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import TaskForm from '../components/TaskForm';
@@ -14,7 +14,7 @@ export default function Home() {
       </Head>
       <Header />
       <TaskForm />
-      <TaskList />
+      <TasksList />
     </div>
   );
 }
