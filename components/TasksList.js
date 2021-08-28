@@ -4,6 +4,7 @@ import fakeTasks, { deleteTask } from '../services/fakeTaskService';
 
 const TasksList = () => {
   const [tasks, setTasks] = useState(fakeTasks);
+  const [loading, setLoading] = useState(false);
 
   const handleTaskDelete = (task) => {
     const filteredTasks = tasks.filter((t) => t._id !== task._id);
@@ -21,7 +22,11 @@ const TasksList = () => {
         <Task task={task} key={task._id} onTaskDelete={handleTaskDelete} />
       ))}
       <div className="tasks-footer">
-        <p>{tasks.length} items left</p>
+        {tasks.length === 0 ? (
+          <p>Yey! there are no tasks left to do.</p>
+        ) : (
+          <p>{tasks.length} items left</p>
+        )}
         <div className="sort-menu"></div>
       </div>
     </div>
