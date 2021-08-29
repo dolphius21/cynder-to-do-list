@@ -1,22 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 /* Variables */
 $light-primary-clr: #55c8c6;
-$light-secondary-clr: #846ed2;
-$delete-clr: #e74545;
-$light-neutral-clr: #4c4b59;
-$light-neutral-disabled: #9d9ca1;
-$light-neutral-outline: #e6e5ea;
+$light-secondary-clr: #9b84ee;
+$light-neutral-clr-1: #4a495f;
+$light-neutral-clr-2: #7a798b;
+$light-neutral-clr-3: #9c9cb4;
+$light-neutral-clr-4: #e6e5ea;
 $white-clr: #fff;
 $black-clr: #1f2020;
 $gradient-primary: linear-gradient(
   120deg,
-  rgb(110, 69, 226) 0%,
+  rgb(144, 111, 236) 0%,
   rgb(136, 211, 206) 100%
 );
 $gradient-overlay: linear-gradient(
-  120deg,
-  rgba(110, 69, 226, 0.7) 0%,
-  rgba(136, 211, 206, 0.8) 100%
+  145deg,
+  rgba(110, 69, 226, 0.5) 0%,
+  rgba(136, 211, 206, 0.5) 100%
 );
 $ff-general: 'Noto Sans JP', sans-serif;
 $transition-1: all 0.2s linear;
@@ -27,7 +27,7 @@ $radius-sm: 0.5rem;
 $radius-md: 1rem;
 $radius-lg: 1.5rem;
 $light-shadow: 0 5px 15px rgba(70, 82, 190, 0.05);
-$dark-shadow: 0 3px 30px rgba(20, 25, 65, 0.2);
+$dark-shadow: 0 3px 30px rgba(23, 31, 94, 0.2);
 $solid-text-shadow: 0px 2px 0px #abc6e2;
 $solid-box-shadow: 0px 4px 0px 0#cedce9;
 $max-width: 900px;
@@ -113,7 +113,7 @@ input {
       flex-direction: column-reverse;
       .input-label {
         transition: all $transition-2;
-        color: $light-neutral-clr;
+        color: $light-neutral-clr-1;
         font-size: 0.8rem;
         margin-bottom: 0.25rem;
       }
@@ -122,12 +122,12 @@ input {
         border: 0;
         background-color: transparent;
         margin-right: 1rem;
-        border-bottom: 1px solid $light-neutral-outline;
+        border-bottom: 1px solid $light-neutral-clr-4;
         font: inherit;
         font-size: 1rem;
         padding: 0.25rem 0;
         &::placeholder {
-          color: $light-neutral-disabled;
+          color: $light-neutral-clr-3;
         }
         &:focus {
           outline: 0;
@@ -148,7 +148,7 @@ input {
   display: flex;
   align-items: center;
   padding: 0.75rem 1.5rem;
-  background: $light-primary-clr;
+  background: $gradient-primary;
   border-radius: $radius-sm $radius-sm 0 0;
   color: $white-clr;
   &-title {
@@ -163,36 +163,43 @@ input {
 }
 .task-row {
   padding: 1rem 1.5rem;
-  border-bottom: 1px solid $light-neutral-outline;
+  border-bottom: 1px solid $light-neutral-clr-4;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: $light-neutral-clr;
+  color: $light-neutral-clr-1;
   .task-title {
     text-align: left;
     display: flex;
     flex: 1;
     font-size: 1rem;
-    color: $light-neutral-clr;
+    color: $light-neutral-clr-1;
     .check-icon {
-      margin-right: 1.5rem;
+      margin-right: 1rem;
       cursor: pointer;
       font-size: 1.25rem;
       color: $white-clr;
-      border: 3px solid $light-secondary-clr;
+      border: 2px solid $light-neutral-clr-4;
       height: 30px;
       width: 30px;
       padding: 4px;
       border-radius: 50%;
       transition: $transition-2;
     }
+    .check-icon:hover {
+      border: 2px solid $light-secondary-clr;
+    }
+    .complete-check-icon {
+      background: $gradient-primary;
+      border: 0;
+    }
   }
   .task-due-date {
-    color: $light-neutral-disabled;
+    color: $light-neutral-clr-3;
   }
   .task-icon {
     margin-left: 1rem;
-    color: $light-neutral-disabled;
+    color: $light-neutral-clr-3;
     cursor: pointer;
     transition: $transition-2;
   }
@@ -202,8 +209,37 @@ input {
 }
 .tasks-footer {
   display: flex;
+  justify-content: space-between;
   padding: 1rem 1.5rem;
-  color: $light-neutral-disabled;
+  color: $light-neutral-clr-3;
+  .sort-menu {
+    display: flex;
+    justify-content: space-between;
+    .sort-btn {
+      color: $light-neutral-clr-3;
+      background: transparent;
+      border: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 1rem;
+      cursor: pointer;
+    }
+    .active {
+      color: $light-secondary-clr;
+    }
+  }
+  .clear-completed-btn {
+    color: $light-neutral-clr-3;
+    background: transparent;
+    border: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .sort-btn:hover,
+  .clear-completed-btn:hover {
+    color: $light-neutral-clr-2;
+  }
 }
 /* Loader Styles */
 .spinner {

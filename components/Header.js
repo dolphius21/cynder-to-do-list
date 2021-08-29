@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="text-container">
-        <h2>Welcome</h2>
+        <h2>My Tasks</h2>
         <p>{currDate}</p>
       </div>
     </header>
