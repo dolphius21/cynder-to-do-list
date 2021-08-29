@@ -30,7 +30,11 @@ const SingleTask = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
       <p className={`task-due-date ${overdue && 'date-overdue'}`}>
         {formattedDueDate}
       </p>
-      <FaPencilAlt className="task-icon" />
+      <Link href={`/tasks/${_id}`}>
+        <a>
+          <FaPencilAlt className="task-icon" />
+        </a>
+      </Link>
       <FaTrashAlt onClick={() => onTaskDelete(_id)} className="task-icon" />
     </div>
   );

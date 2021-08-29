@@ -48,8 +48,6 @@ const TaskDetails = ({ details }) => {
 
   const overdue = details.dueDate < new Date().toISOString();
 
-  console.log(overdue);
-
   return (
     <div className="container">
       <Head>
@@ -72,7 +70,7 @@ const TaskDetails = ({ details }) => {
           />
           <div
             className={`task-form-status ${
-              details.isComplete && !overdue
+              details.isComplete
                 ? 'task-form-status-complete'
                 : !details.isComplete && !overdue
                 ? 'task-form-status-incomplete'
