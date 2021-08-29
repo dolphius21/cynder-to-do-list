@@ -6,6 +6,7 @@ $light-neutral-clr-1: #4a495f;
 $light-neutral-clr-2: #7a798b;
 $light-neutral-clr-3: #9c9cb4;
 $light-neutral-clr-4: #e6e5ea;
+$danger-clr: #ec4646;
 $white-clr: #fff;
 $black-clr: #1f2020;
 $gradient-primary: linear-gradient(
@@ -205,9 +206,21 @@ input {
       background: $gradient-primary;
       border: 0;
     }
+    .task-overdue {
+      font-size: 0.8rem;
+      display: inline-block;
+      padding: 0.5rem;
+      margin-left: 1rem;
+      background: $danger-clr;
+      color: $white-clr;
+      border-radius: $radius-sm;
+    }
   }
   .task-due-date {
     color: $light-neutral-clr-3;
+  }
+  .date-overdue {
+    color: $danger-clr;
   }
   .task-icon {
     margin-left: 1rem;

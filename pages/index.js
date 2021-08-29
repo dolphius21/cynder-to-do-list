@@ -9,6 +9,7 @@ import fakeTasks from '../services/fakeTaskService';
 export default function Home() {
   const [tasks, setTasks] = useState(fakeTasks);
   const [loading, setLoading] = useState(false);
+  const [filterType, setFilterType] = useState('all');
 
   const handleAddTask = (task) => {
     const tasksCopy = [...tasks];
@@ -27,7 +28,21 @@ export default function Home() {
     setTasks(tasksCopy);
   };
 
-  const handleTaskSort = () => {};
+  const handleChangeFilterType = (filterType) => {
+    setFilterType(filterType);
+  };
+
+  const filteredTasks = tasks.filter((task) => {
+    if (filterType === 'all') {
+      return tasks;
+    }
+    if (filterType === 'complete') {
+      return task.isComplete === true;
+    }
+    if (filterType === 'overdue') {
+      return !task.isComplete && task.dueDate < new Date().toISOString();
+    }
+  });
 
   return (
     <div className="container">
@@ -39,9 +54,10 @@ export default function Home() {
       <Header />
       <TaskForm onAddTask={handleAddTask} />
       <TasksList
-        tasks={tasks}
+        tasks={filteredTasks}
         onTaskDelete={handleTaskDelete}
         onTaskCompleteToggle={handleTaskCompleteToggle}
+        onChangeFilterType={handleChangeFilterType}
       />
     </div>
   );

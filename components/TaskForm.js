@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { format, setDate } from 'date-fns';
+import { format } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from './Button';
@@ -14,7 +14,7 @@ const TaskForm = ({ onAddTask }) => {
     const newTask = {
       title,
       description,
-      dueDate,
+      dueDate: new Date(dueDate).toISOString(),
       isComplete: false
     };
     onAddTask(newTask);

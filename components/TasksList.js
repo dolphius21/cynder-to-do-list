@@ -1,6 +1,11 @@
 import Task from './Task';
 
-const TasksList = ({ tasks, onTaskDelete, onTaskCompleteToggle }) => {
+const TasksList = ({
+  tasks,
+  onTaskDelete,
+  onTaskCompleteToggle,
+  onChangeFilterType
+}) => {
   return (
     <div className="card">
       <div className="tasks-header">
@@ -16,16 +21,28 @@ const TasksList = ({ tasks, onTaskDelete, onTaskCompleteToggle }) => {
           onTaskCompleteToggle={onTaskCompleteToggle}
         />
       ))}
+
       <div className="tasks-footer">
-        {tasks.length === 0 ? (
-          <p>Yey! there are no tasks left to do.</p>
-        ) : (
-          <p>{tasks.length} items left</p>
-        )}
+        <p>{tasks.length} items left</p>
         <div className="sort-menu">
-          <button className="sort-btn active">All</button>
-          <button className="sort-btn">Completed</button>
-          <button className="sort-btn">Overdue</button>
+          <button
+            className="sort-btn active"
+            onClick={() => onChangeFilterType('all')}
+          >
+            All
+          </button>
+          <button
+            className="sort-btn"
+            onClick={() => onChangeFilterType('complete')}
+          >
+            Completed
+          </button>
+          <button
+            className="sort-btn"
+            onClick={() => onChangeFilterType('overdue')}
+          >
+            Overdue
+          </button>
         </div>
         <button className="clear-completed-btn">Clear Completed</button>
       </div>
