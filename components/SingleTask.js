@@ -1,8 +1,9 @@
+import Link from 'next/link';
 import { format } from 'date-fns';
 import { GoCheck } from 'react-icons/go';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 
-const Task = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
+const SingleTask = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
   const { _id, title, dueDate, isComplete } = taskDetails;
 
   const formattedDueDate = format(new Date(dueDate), 'MM/dd/yyyy');
@@ -16,10 +17,15 @@ const Task = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
           className={`check-icon ${isComplete && 'complete-check-icon'}`}
           onClick={() => onTaskCompleteToggle(taskDetails)}
         />
-        <h3>
-          {title}
-          {overdue && <span className="task-overdue">overdue</span>}
-        </h3>
+        <Link href={`/tasks/${_id}`}>
+          <a>
+            <h3 className={isComplete ? 'task-title-complete' : undefined}>
+              {title}
+              {overdue && <span className="task-overdue">overdue</span>}
+              <span className={isComplete ? 'line' : undefined}></span>
+            </h3>
+          </a>
+        </Link>
       </div>
       <p className={`task-due-date ${overdue && 'date-overdue'}`}>
         {formattedDueDate}
@@ -30,4 +36,4 @@ const Task = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
   );
 };
 
-export default Task;
+export default SingleTask;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import TasksList from '../components/TasksList';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
-import TaskForm from '../components/TaskForm';
+import TaskListForm from '../components/TaskListForm';
 import fakeTasks from '../services/fakeTaskService';
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <TaskForm onAddTask={handleAddTask} />
+      <TaskListForm onAddTask={handleAddTask} />
       <TasksList
         tasks={filteredTasks}
         onTaskDelete={handleTaskDelete}

@@ -4,7 +4,7 @@ const tasks = [
     title: 'Learn react',
     description: 'a react component exercise',
     dueDate: '2021-09-03T12:28:30.881Z',
-    isComplete: false
+    isComplete: true
   },
   {
     _id: '5b21ca3eeb7f6fbccd471816',

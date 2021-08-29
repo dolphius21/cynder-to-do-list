@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from './Button';
 
-const TaskForm = ({ onAddTask }) => {
+const TaskListForm = ({ onAddTask }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
@@ -12,6 +12,7 @@ const TaskForm = ({ onAddTask }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTask = {
+      _id: new Date().toISOString(),
       title,
       description,
       dueDate: new Date(dueDate).toISOString(),
@@ -59,7 +60,6 @@ const TaskForm = ({ onAddTask }) => {
           <div className="form-group mt">
             <textarea
               className="input-desc"
-              name="description"
               cols="75"
               rows="2"
               placeholder="task description..."
@@ -74,4 +74,4 @@ const TaskForm = ({ onAddTask }) => {
   );
 };
 
-export default TaskForm;
+export default TaskListForm;

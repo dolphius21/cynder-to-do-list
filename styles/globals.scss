@@ -5,8 +5,10 @@ $light-secondary-clr: #9b84ee;
 $light-neutral-clr-1: #4a495f;
 $light-neutral-clr-2: #7a798b;
 $light-neutral-clr-3: #9c9cb4;
-$light-neutral-clr-4: #e6e5ea;
-$danger-clr: #ec4646;
+$light-neutral-clr-4: #dcdae7;
+$complete-clr: #3bc9a5;
+$incomplete-clr: #fff45c;
+$overdue-clr: #ec4646;
 $white-clr: #fff;
 $black-clr: #1f2020;
 $gradient-primary: linear-gradient(
@@ -23,7 +25,6 @@ $ff-general: 'Noto Sans JP', sans-serif;
 $transition-1: all 0.2s linear;
 $transition-2: all 0.3s linear;
 $spacing: 0.1rem;
-$border: 2px solid #eaeaf7;
 $radius-sm: 0.5rem;
 $radius-md: 1rem;
 $radius-lg: 1.5rem;
@@ -109,7 +110,7 @@ input {
     }
   }
 }
-/* Form Styles */
+/* Tasklist Form Styles */
 .form {
   padding: 1rem 1.5rem;
   &-row {
@@ -149,6 +150,7 @@ input {
         padding: 0.5rem;
         font-family: $ff-general;
         margin-bottom: 0.5rem;
+        border-radius: $radius-sm;
         &::placeholder {
           color: $light-neutral-clr-3;
         }
@@ -159,7 +161,7 @@ input {
     }
   }
 }
-/* Tasks Styles */
+/* Tasklist Styles */
 .tasks-header {
   display: flex;
   align-items: center;
@@ -190,6 +192,20 @@ input {
     flex: 1;
     font-size: 1rem;
     color: $light-neutral-clr-1;
+    a {
+      text-decoration: none;
+      color: $light-neutral-clr-1;
+      h3 {
+        position: relative;
+        .line {
+          position: absolute;
+          display: block;
+          top: 16px;
+          border-bottom: 1px solid $light-neutral-clr-3;
+          width: 100%;
+        }
+      }
+    }
     .check-icon {
       margin-right: 1rem;
       cursor: pointer;
@@ -211,16 +227,19 @@ input {
       display: inline-block;
       padding: 0.5rem;
       margin-left: 1rem;
-      background: $danger-clr;
+      background: $overdue-clr;
       color: $white-clr;
       border-radius: $radius-sm;
     }
+  }
+  .task-title-complete {
+    color: $light-neutral-clr-3;
   }
   .task-due-date {
     color: $light-neutral-clr-3;
   }
   .date-overdue {
-    color: $danger-clr;
+    color: $overdue-clr;
   }
   .task-icon {
     margin-left: 1rem;
@@ -264,6 +283,93 @@ input {
   .sort-btn:hover,
   .clear-completed-btn:hover {
     color: $light-neutral-clr-2;
+  }
+}
+/* Task Styles */
+.task-form {
+  padding: 2rem;
+  &-title {
+    border: 1px solid $white-clr;
+    width: 100%;
+    border-radius: $radius-sm;
+    font-weight: 600;
+    display: block;
+    font-size: 2rem;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    outline: none;
+    &:hover {
+      border: 1px solid $light-neutral-clr-3;
+    }
+    &:focus {
+      border: 1px solid $light-neutral-clr-2;
+    }
+  }
+  &-status {
+    padding: 0.5rem 0.75rem;
+    border: 0;
+    font-size: 0.8rem;
+    text-align: center;
+    border-radius: $radius-md;
+    max-width: 100px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    &-complete {
+      background: $complete-clr;
+    }
+    &-incomplete {
+      background: $incomplete-clr;
+    }
+    &-overdue {
+      background: $overdue-clr;
+    }
+  }
+  &-due-date {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    margin-bottom: 1rem;
+    p {
+      margin-right: 1rem;
+    }
+    &-picker {
+      padding: 0.5rem;
+      font-size: 1rem;
+      width: 150px;
+      border: 1px solid $white-clr;
+      border-radius: $radius-sm;
+      outline: none;
+      &:hover {
+        border: 1px solid $light-neutral-clr-3;
+      }
+      &:focus {
+        border: 1px solid $light-neutral-clr-2;
+      }
+    }
+  }
+  &-description {
+    border: 1px solid $light-neutral-clr-4;
+    font-size: 1rem;
+    padding: 0.5rem;
+    font-family: $ff-general;
+    margin-bottom: 0.5rem;
+    border-radius: $radius-sm;
+    outline: none;
+    &:hover {
+      border: 1px solid $light-neutral-clr-3;
+    }
+    &:focus {
+      border: 1px solid $light-neutral-clr-2;
+    }
+  }
+  .form-div {
+    width: 100%;
+    display: flex;
+  }
+  .default-btn {
+    margin-left: auto;
+    padding: 1rem;
   }
 }
 /* Loader Styles */

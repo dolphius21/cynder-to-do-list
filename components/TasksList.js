@@ -1,4 +1,4 @@
-import Task from './Task';
+import SingleTask from './SingleTask';
 
 const TasksList = ({
   tasks,
@@ -14,7 +14,7 @@ const TasksList = ({
         <div className="tasks-header-padding"></div>
       </div>
       {tasks.map((task, index) => (
-        <Task
+        <SingleTask
           taskDetails={task}
           key={index}
           onTaskDelete={onTaskDelete}
