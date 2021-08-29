@@ -1,22 +1,39 @@
 import { useState } from 'react';
-import { format } from 'date-fns';
+import { format, setDate } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Button from './Button';
 
-const TaskForm = () => {
-  const [dueDate, setDueDate] = useState(null);
+const TaskForm = ({ onAddTask }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [dueDate, setDueDate] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newTask = {
+      title,
+      description,
+      dueDate,
+      isComplete: false
+    };
+    onAddTask(newTask);
+    setTitle('');
+    setDescription('');
+    setDueDate('');
+  };
 
   return (
     <div className="card">
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group flex-1">
             <input
               type="text"
               className="input-field"
-              id="username"
               placeholder="Add a new task..."
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
               required
             />
             <label className="input-label">Create Task</label>
@@ -29,13 +46,28 @@ const TaskForm = () => {
               onChange={(date) => setDueDate(date)}
               id="input-date"
             />
-            <label htmlFor="input-date" className="input-label">
-              Due Date
-            </label>
+            <label className="input-label">Due Date</label>
           </div>
-          <Button className="default-btn light-primary-btn form-btn">
+          <Button
+            className="default-btn light-primary-btn form-btn"
+            type="submit"
+          >
             Add Task
           </Button>
+        </div>
+        <div className="form-row">
+          <div className="form-group mt">
+            <textarea
+              className="input-desc"
+              name="description"
+              cols="75"
+              rows="2"
+              placeholder="task description..."
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            ></textarea>
+            <label className="input-label">Task Description</label>
+          </div>
         </div>
       </form>
     </div>

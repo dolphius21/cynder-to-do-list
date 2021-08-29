@@ -1,10 +1,34 @@
+import { useState } from 'react';
 import Head from 'next/head';
 import TasksList from '../components/TasksList';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import TaskForm from '../components/TaskForm';
+import fakeTasks from '../services/fakeTaskService';
 
 export default function Home() {
+  const [tasks, setTasks] = useState(fakeTasks);
+  const [loading, setLoading] = useState(false);
+
+  const handleAddTask = (task) => {
+    const tasksCopy = [...tasks];
+    setTasks([...tasksCopy, task]);
+  };
+
+  const handleTaskDelete = (id) => {
+    const filteredTasks = tasks.filter((t) => t._id !== id);
+    setTasks(filteredTasks);
+  };
+
+  const handleTaskCompleteToggle = (task) => {
+    const tasksCopy = [...tasks];
+    const index = tasksCopy.indexOf(task);
+    tasksCopy[index] = { ...task, isComplete: !task.isComplete };
+    setTasks(tasksCopy);
+  };
+
+  const handleTaskSort = () => {};
+
   return (
     <div className="container">
       <Head>
@@ -13,8 +37,12 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <TaskForm />
-      <TasksList />
+      <TaskForm onAddTask={handleAddTask} />
+      <TasksList
+        tasks={tasks}
+        onTaskDelete={handleTaskDelete}
+        onTaskCompleteToggle={handleTaskCompleteToggle}
+      />
     </div>
   );
 }

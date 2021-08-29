@@ -1,24 +1,6 @@
-import { useState } from 'react';
 import Task from './Task';
-import fakeTasks from '../services/fakeTaskService';
 
-const TasksList = () => {
-  const [tasks, setTasks] = useState(fakeTasks);
-  const [loading, setLoading] = useState(false);
-
-  const handleTaskDelete = (id) => {
-    const filteredTasks = tasks.filter((t) => t._id !== id);
-    setTasks(filteredTasks);
-  };
-  const handleTaskCompleteToggle = (task) => {
-    const tasksCopy = [...tasks];
-    const index = tasksCopy.indexOf(task);
-    tasksCopy[index] = { ...task, isComplete: !task.isComplete };
-    setTasks(tasksCopy);
-  };
-
-  const handleTaskSort = () => {};
-
+const TasksList = ({ tasks, onTaskDelete, onTaskCompleteToggle }) => {
   return (
     <div className="card">
       <div className="tasks-header">
@@ -26,12 +8,12 @@ const TasksList = () => {
         <p className="tasks-header-due-date">Due Date</p>
         <div className="tasks-header-padding"></div>
       </div>
-      {tasks.map((task) => (
+      {tasks.map((task, index) => (
         <Task
           taskDetails={task}
-          key={task._id}
-          onTaskDelete={handleTaskDelete}
-          onTaskCompleteToggle={handleTaskCompleteToggle}
+          key={index}
+          onTaskDelete={onTaskDelete}
+          onTaskCompleteToggle={onTaskCompleteToggle}
         />
       ))}
       <div className="tasks-footer">
