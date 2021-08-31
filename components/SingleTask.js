@@ -12,7 +12,7 @@ const SingleTask = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
 
   return (
     <tr className="tasks-table-row">
-      <td>
+      <td className="tasks-table-check">
         <GoCheck
           className={`check-icon ${isComplete && 'complete-check-icon'}`}
           onClick={() => onTaskCompleteToggle(taskDetails)}

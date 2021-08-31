@@ -113,15 +113,10 @@ input {
   padding: 1rem 1.5rem;
   &-row {
     display: flex;
+
     .form-group {
       display: flex;
       flex-direction: column-reverse;
-      .input-label {
-        transition: all $transition-2;
-        color: $light-neutral-clr-1;
-        font-size: 0.8rem;
-        margin-bottom: 0.25rem;
-      }
       .input-field,
       .input-date {
         border: 0;
@@ -140,22 +135,40 @@ input {
         }
       }
       .input-date {
-        width: 150px;
-      }
-      .input-desc {
-        border: 1px solid $light-neutral-clr-4;
-        font-size: 1rem;
-        padding: 0.5rem;
-        font-family: $ff-general;
-        margin-bottom: 0.5rem;
-        border-radius: $radius-sm;
-        &::placeholder {
-          color: $light-neutral-clr-3;
-        }
+        max-width: 130px;
       }
     }
     .flex-1 {
       flex: 1;
+    }
+    .input-label {
+      transition: all $transition-2;
+      color: $light-neutral-clr-1;
+      font-size: 0.8rem;
+      margin-bottom: 0.25rem;
+    }
+    .form-group-desc {
+      display: flex;
+      flex-direction: column-reverse;
+      margin-top: 1rem;
+      width: 90%;
+      .input-desc {
+        float: left;
+        width: 100%;
+        height: auto;
+        margin-bottom: 0.5rem;
+        textarea {
+          border: 1px solid $light-neutral-clr-4;
+          border-radius: $radius-sm;
+          width: 100%;
+          font-family: $ff-general;
+          font-size: 1rem;
+          padding: 0.5rem;
+        }
+        &::placeholder {
+          color: $light-neutral-clr-3;
+        }
+      }
     }
   }
 }
@@ -169,11 +182,14 @@ input {
   width: 100%;
   margin: 0 auto;
   position: relative;
-
   td,
   th {
     padding: 0.75rem 1rem;
     text-align: left;
+  }
+  th:last-child,
+  td:last-child {
+    width: 100px;
   }
   thead tr {
     height: 50px;
@@ -185,21 +201,27 @@ input {
     height: 48px;
     border-bottom: 1px solid $light-neutral-clr-4;
   }
-  .check-icon {
-    margin-right: 1rem;
-    cursor: pointer;
-    font-size: 1.25rem;
-    color: $white-clr;
-    border: 2px solid $light-neutral-clr-4;
-    height: 30px;
-    width: 30px;
-    padding: 4px;
-    border-radius: 50%;
-    transition: $transition-2;
-  }
-  .complete-check-icon {
-    background: $gradient-primary;
-    border: 0;
+  & &-check {
+    display: flex;
+    align-items: center;
+    width: 65px;
+    height: 60px;
+    margin-right: -1.25rem;
+    .check-icon {
+      cursor: pointer;
+      font-size: 1.25rem;
+      color: $white-clr;
+      border: 2px solid $light-neutral-clr-4;
+      height: 30px;
+      width: 30px;
+      padding: 4px;
+      border-radius: 50%;
+      transition: $transition-2;
+    }
+    .complete-check-icon {
+      background: $gradient-primary;
+      border: 0;
+    }
   }
   &-title {
     color: $light-neutral-clr-1;
@@ -207,6 +229,7 @@ input {
     font-weight: 600;
     a {
       text-decoration: none;
+      display: flex;
       color: $light-neutral-clr-1;
       position: relative;
       .line {
@@ -219,18 +242,17 @@ input {
     }
   }
   .tasks-table-title-complete {
-    display: flex;
     justify-content: space-between;
     color: $light-neutral-clr-3;
   }
   &-overdue {
     font-size: 0.8rem;
     display: inline-block;
-    padding: 0.5rem;
+    padding: 0.25rem 0.5rem;
     margin-left: 1rem;
     background: $overdue-clr;
     color: $white-clr;
-    border-radius: $radius-sm;
+    border-radius: $radius-md;
   }
   &-due-date {
     color: $light-neutral-clr-3;
@@ -357,18 +379,22 @@ input {
     }
   }
   &-description {
-    border: 1px solid $light-neutral-clr-4;
-    font-size: 1rem;
-    padding: 0.5rem;
-    font-family: $ff-general;
-    margin-bottom: 0.5rem;
-    border-radius: $radius-sm;
-    outline: none;
-    &:hover {
-      border: 1px solid $light-neutral-clr-3;
-    }
-    &:focus {
-      border: 1px solid $light-neutral-clr-2;
+    width: 100%;
+    textarea {
+      width: 100%;
+      border: 1px solid $light-neutral-clr-4;
+      font-size: 1rem;
+      padding: 0.5rem;
+      font-family: $ff-general;
+      margin-bottom: 0.5rem;
+      border-radius: $radius-sm;
+      outline: none;
+      &:hover {
+        border: 1px solid $light-neutral-clr-3;
+      }
+      &:focus {
+        border: 1px solid $light-neutral-clr-2;
+      }
     }
   }
   .form-div {

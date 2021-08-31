@@ -98,14 +98,14 @@ const TaskDetails = ({ details }) => {
             />
             {overdue && <p>Overdue</p>}
           </div>
-          <textarea
-            className="task-form-description"
-            cols="85"
-            rows="3"
-            placeholder="task description..."
-            onChange={(e) => setDescription(e.target.value)}
-            value={description}
-          ></textarea>
+          <div className="task-form-description">
+            <textarea
+              rows="3"
+              placeholder="task description..."
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+            ></textarea>
+          </div>
           <div className="form-div">
             <Button className="default-btn light-primary-btn" type="submit">
               Save Task

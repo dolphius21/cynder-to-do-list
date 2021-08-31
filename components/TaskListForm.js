@@ -57,15 +57,15 @@ const TaskListForm = ({ onAddTask }) => {
           </Button>
         </div>
         <div className="form-row">
-          <div className="form-group mt">
-            <textarea
-              className="input-desc"
-              cols="108"
-              rows="2"
-              placeholder="Add a task description..."
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
-            ></textarea>
+          <div className="form-group-desc">
+            <div className="input-desc">
+              <textarea
+                rows="2"
+                placeholder="Add a task description..."
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
+              ></textarea>
+            </div>
             <label className="input-label">Task Description</label>
           </div>
         </div>
