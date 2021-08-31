@@ -77,13 +77,11 @@ input {
 }
 /* Header Styles */
 .header {
-  background: $gradient-overlay, url(../public/header-bg.jpeg) no-repeat;
-  background-size: 100vw 100%;
-  background-position-y: -200px;
-  background-attachment: fixed;
+  background: $gradient-overlay,
+    url(../public/header-bg.jpeg) no-repeat center/ cover;
   padding-top: 30px;
   width: 100vw;
-  height: 50vh;
+  height: 300px;
   position: absolute;
   top: 0;
   left: 0;
@@ -108,7 +106,7 @@ input {
     }
   }
 }
-/* Tasklist Form Styles */
+/* Todolist Form Styles */
 .form {
   padding: 1rem 1.5rem;
   &-row {
@@ -172,11 +170,11 @@ input {
     }
   }
 }
-/* Tasks Table Styles */
-.tasks-table-container {
+/* Todos Table Styles */
+.todos-table-container {
   overflow: hidden;
 }
-.tasks-table {
+.todos-table {
   border-spacing: 1;
   border-collapse: collapse;
   width: 100%;
@@ -241,7 +239,7 @@ input {
       }
     }
   }
-  .tasks-table-title-complete {
+  .todos-table-title-complete {
     justify-content: space-between;
     color: $light-neutral-clr-3;
   }
@@ -277,7 +275,7 @@ input {
     color: $light-neutral-clr-3;
   }
 }
-.tasks-table-footer {
+.todos-table-footer {
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.5rem;
@@ -311,8 +309,8 @@ input {
     color: $light-neutral-clr-2;
   }
 }
-/* Task Form Styles */
-.task-form {
+/* Todo Form Styles */
+.todo-form {
   padding: 2rem;
   &-title {
     border: 1px solid $white-clr;

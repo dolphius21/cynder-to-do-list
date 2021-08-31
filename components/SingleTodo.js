@@ -1,0 +1,49 @@
+import Link from 'next/link';
+import { format } from 'date-fns';
+import { GoCheck } from 'react-icons/go';
+import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
+
+const SingleTodo = ({ todoDetails, onTodoDelete, onTodoCompleteToggle }) => {
+  const { _id, title, description, dueDate, isComplete } = todoDetails;
+
+  const formattedDueDate = format(new Date(dueDate), 'MM/dd/yyyy');
+
+  const overdue = !isComplete && dueDate < new Date().toISOString();
+
+  return (
+    <tr className="todos-table-row">
+      <td className="todos-table-check">
+        <GoCheck
+          className={`check-icon ${isComplete && 'complete-check-icon'}`}
+          onClick={() => onTodoCompleteToggle(todoDetails)}
+        />
+      </td>
+      <td className="todos-table-title">
+        <Link href={`/todos/${_id}`}>
+          <a className={isComplete ? 'todos-table-title-complete' : undefined}>
+            {title}
+            {overdue && <span className="todos-table-overdue">overdue</span>}
+            <span className={isComplete ? 'line' : undefined}></span>
+          </a>
+        </Link>
+      </td>
+      <td className="todos-table-description">
+        {description.substring(0, 20) + '...'}
+      </td>
+      <td className="todos-table-due-date">{formattedDueDate}</td>
+      <td className="todos-table-icons">
+        <Link href={`/todos/${_id}`}>
+          <a>
+            <FaPencilAlt className="todos-table-icon" />
+          </a>
+        </Link>
+        <FaTrashAlt
+          onClick={() => onTodoDelete(_id)}
+          className="todos-table-icon"
+        />
+      </td>
+    </tr>
+  );
+};
+
+export default SingleTodo;

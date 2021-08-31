@@ -1,23 +1,23 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
-import { format, parseISO } from 'date-fns';
+import { parseISO } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../components/Header';
-import fakeTasks from '../../services/fakeTaskService';
+import fakeTodos from '../../services/fakeTodosService';
 import Button from '../../components/Button';
 
 export const getStaticPaths = async () => {
   const data = await new Promise((res, rej) => {
     setTimeout(() => {
-      res(fakeTasks);
+      res(fakeTodos);
     });
   }, 500);
 
-  const paths = data.map((task) => {
+  const paths = data.map((todo) => {
     return {
-      params: { id: task._id },
+      params: { id: todo._id },
     };
   });
 
@@ -31,7 +31,7 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const details = await new Promise((res, rej) => {
     setTimeout(() => {
-      const result = fakeTasks.find((task) => task._id === id);
+      const result = fakeTodos.find((todo) => todo._id === id);
       res(result);
     }, 500);
   });
@@ -41,7 +41,7 @@ export const getStaticProps = async (context) => {
   };
 };
 
-const TaskDetails = ({ details }) => {
+const TodoDetails = ({ details }) => {
   const [title, setTitle] = useState(details.title);
   const [description, setDescription] = useState(details.description);
   const [dueDate, setDueDate] = useState(parseISO(details.dueDate));
@@ -57,25 +57,25 @@ const TaskDetails = ({ details }) => {
       </Head>
       <Header />
       <div className="card">
-        <div className="task-form">
+        <div className="todo-form">
           <Link href="/">
-            <a>Back to task list...</a>
+            <a>Back to todo list...</a>
           </Link>
           <input
             type="text"
-            className="task-form-title"
+            className="todo-form-title"
             onChange={(e) => setTitle(e.target.value)}
             value={title}
             required
           />
           <div
-            className={`task-form-status ${
+            className={`todo-form-status ${
               details.isComplete
-                ? 'task-form-status-complete'
+                ? 'todo-form-status-complete'
                 : !details.isComplete && !overdue
-                ? 'task-form-status-incomplete'
+                ? 'todo-form-status-incomplete'
                 : !details.isComplete && overdue
-                ? 'task-form-status-overdue'
+                ? 'todo-form-status-overdue'
                 : ''
             }`}
           >
@@ -89,26 +89,26 @@ const TaskDetails = ({ details }) => {
                 : ''}
             </p>
           </div>
-          <div className="task-form-due-date">
+          <div className="todo-form-due-date">
             <p>Due date:</p>
             <DatePicker
-              className="task-form-due-date-picker"
+              className="todo-form-due-date-picker"
               selected={dueDate}
               onChange={(date) => setDueDate(date)}
             />
             {overdue && <p>Overdue</p>}
           </div>
-          <div className="task-form-description">
+          <div className="todo-form-description">
             <textarea
               rows="3"
-              placeholder="task description..."
+              placeholder="todo description..."
               onChange={(e) => setDescription(e.target.value)}
               value={description}
             ></textarea>
           </div>
           <div className="form-div">
             <Button className="default-btn light-primary-btn" type="submit">
-              Save Task
+              Save Todo
             </Button>
           </div>
         </div>
@@ -117,4 +117,4 @@ const TaskDetails = ({ details }) => {
   );
 };
 
-export default TaskDetails;
+export default TodoDetails;

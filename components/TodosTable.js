@@ -1,15 +1,15 @@
-import SingleTask from './SingleTask';
+import SingleTodo from './SingleTodo';
 
-const TaskTable = ({
-  tasks,
-  onTaskDelete,
-  onTaskCompleteToggle,
+const TodosTable = ({
+  todos,
+  onTodoDelete,
+  onTodoCompleteToggle,
   onChangeFilterType,
-  onCompletedTaskDelete,
+  onCompletedTodosDelete,
 }) => {
   return (
-    <div className="card tasks-table-container">
-      <table className="tasks-table">
+    <div className="card todos-table-container">
+      <table className="todos-table">
         <thead>
           <tr>
             <th></th>
@@ -20,18 +20,18 @@ const TaskTable = ({
           </tr>
         </thead>
         <tbody>
-          {tasks.map((task, index) => (
-            <SingleTask
-              taskDetails={task}
+          {todos.map((todo, index) => (
+            <SingleTodo
+              todoDetails={todo}
               key={index}
-              onTaskDelete={onTaskDelete}
-              onTaskCompleteToggle={onTaskCompleteToggle}
+              onTodoDelete={onTodoDelete}
+              onTodoCompleteToggle={onTodoCompleteToggle}
             />
           ))}
         </tbody>
       </table>
-      <div className="tasks-table-footer">
-        <p>{tasks.length} items left</p>
+      <div className="todos-table-footer">
+        <p>{todos.length} items left</p>
         <div className="filter-menu">
           <button
             className="filter-btn active"
@@ -52,7 +52,10 @@ const TaskTable = ({
             Overdue
           </button>
         </div>
-        <button className="clear-completed-btn" onClick={onCompletedTaskDelete}>
+        <button
+          className="clear-completed-btn"
+          onClick={onCompletedTodosDelete}
+        >
           Clear Completed
         </button>
       </div>
@@ -60,4 +63,4 @@ const TaskTable = ({
   );
 };
 
-export default TaskTable;
+export default TodosTable;
