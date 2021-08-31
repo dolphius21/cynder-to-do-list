@@ -16,7 +16,7 @@ const TaskListForm = ({ onAddTask }) => {
       title,
       description,
       dueDate: new Date(dueDate).toISOString(),
-      isComplete: false
+      isComplete: false,
     };
     onAddTask(newTask);
     setTitle('');
@@ -60,9 +60,9 @@ const TaskListForm = ({ onAddTask }) => {
           <div className="form-group mt">
             <textarea
               className="input-desc"
-              cols="75"
+              cols="108"
               rows="2"
-              placeholder="task description..."
+              placeholder="Add a task description..."
               onChange={(e) => setDescription(e.target.value)}
               value={description}
             ></textarea>

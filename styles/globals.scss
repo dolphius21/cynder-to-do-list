@@ -30,9 +30,7 @@ $radius-md: 1rem;
 $radius-lg: 1.5rem;
 $light-shadow: 0 5px 15px rgba(70, 82, 190, 0.05);
 $dark-shadow: 0 5px 15px rgba(23, 31, 94, 0.2);
-$solid-text-shadow: 0px 2px 0px #abc6e2;
-$solid-box-shadow: 0px 4px 0px 0#cedce9;
-$max-width: 900px;
+$max-width: 1200px;
 /* Global Styles */
 html,
 body {
@@ -161,105 +159,111 @@ input {
     }
   }
 }
-/* Tasklist Styles */
-.tasks-header {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  background: $gradient-primary;
-  border-radius: $radius-sm $radius-sm 0 0;
-  color: $white-clr;
-  &-title {
-    flex: 1;
-  }
-  &-due-date {
-    width: 85px;
-  }
-  &-padding {
-    width: 64px;
-  }
+/* Tasks Table Styles */
+.tasks-table-container {
+  overflow: hidden;
 }
-.task-row {
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid $light-neutral-clr-4;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: $light-neutral-clr-1;
-  .task-title {
+.tasks-table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+
+  td,
+  th {
+    padding: 0.75rem 1rem;
     text-align: left;
-    display: flex;
-    flex: 1;
+  }
+  thead tr {
+    height: 50px;
+    background: $gradient-primary;
     font-size: 1rem;
+    color: $white-clr;
+  }
+  tbody tr {
+    height: 48px;
+    border-bottom: 1px solid $light-neutral-clr-4;
+  }
+  .check-icon {
+    margin-right: 1rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    color: $white-clr;
+    border: 2px solid $light-neutral-clr-4;
+    height: 30px;
+    width: 30px;
+    padding: 4px;
+    border-radius: 50%;
+    transition: $transition-2;
+  }
+  .complete-check-icon {
+    background: $gradient-primary;
+    border: 0;
+  }
+  &-title {
     color: $light-neutral-clr-1;
+    font-size: 1.25rem;
+    font-weight: 600;
     a {
       text-decoration: none;
       color: $light-neutral-clr-1;
-      h3 {
-        position: relative;
-        .line {
-          position: absolute;
-          display: block;
-          top: 16px;
-          border-bottom: 1px solid $light-neutral-clr-3;
-          width: 100%;
-        }
+      position: relative;
+      .line {
+        position: absolute;
+        display: block;
+        top: 16px;
+        border-bottom: 1px solid $light-neutral-clr-3;
+        width: 100%;
       }
     }
-    .check-icon {
-      margin-right: 1rem;
-      cursor: pointer;
-      font-size: 1.25rem;
-      color: $white-clr;
-      border: 2px solid $light-neutral-clr-4;
-      height: 30px;
-      width: 30px;
-      padding: 4px;
-      border-radius: 50%;
-      transition: $transition-2;
-    }
-    .complete-check-icon {
-      background: $gradient-primary;
-      border: 0;
-    }
-    .task-overdue {
-      font-size: 0.8rem;
-      display: inline-block;
-      padding: 0.5rem;
-      margin-left: 1rem;
-      background: $overdue-clr;
-      color: $white-clr;
-      border-radius: $radius-sm;
-    }
   }
-  .task-title-complete {
+  .tasks-table-title-complete {
+    display: flex;
+    justify-content: space-between;
     color: $light-neutral-clr-3;
   }
-  .task-due-date {
+  &-overdue {
+    font-size: 0.8rem;
+    display: inline-block;
+    padding: 0.5rem;
+    margin-left: 1rem;
+    background: $overdue-clr;
+    color: $white-clr;
+    border-radius: $radius-sm;
+  }
+  &-due-date {
     color: $light-neutral-clr-3;
   }
   .date-overdue {
     color: $overdue-clr;
   }
-  .task-icon {
+  &-icon {
     margin-left: 1rem;
     color: $light-neutral-clr-3;
     cursor: pointer;
     transition: $transition-2;
   }
-  .task-icon:hover {
+  &-icon:hover {
     color: $light-secondary-clr;
   }
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 0 1.5rem;
+    color: $light-neutral-clr-3;
+  }
 }
-.tasks-footer {
+.tasks-table-footer {
   display: flex;
   justify-content: space-between;
   padding: 1rem 1.5rem;
   color: $light-neutral-clr-3;
-  .sort-menu {
+  .filter-menu {
     display: flex;
     justify-content: space-between;
-    .sort-btn {
+    .filter-btn {
       color: $light-neutral-clr-3;
       background: transparent;
       border: 0;
@@ -285,7 +289,7 @@ input {
     color: $light-neutral-clr-2;
   }
 }
-/* Task Styles */
+/* Task Form Styles */
 .task-form {
   padding: 2rem;
   &-title {
@@ -304,7 +308,11 @@ input {
     &:focus {
       border: 1px solid $light-neutral-clr-2;
     }
+    &-complete {
+      color: $light-neutral-clr-3;
+    }
   }
+
   &-status {
     padding: 0.5rem 0.75rem;
     border: 0;

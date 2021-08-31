@@ -4,39 +4,45 @@ import { GoCheck } from 'react-icons/go';
 import { FaTrashAlt, FaPencilAlt } from 'react-icons/fa';
 
 const SingleTask = ({ taskDetails, onTaskDelete, onTaskCompleteToggle }) => {
-  const { _id, title, dueDate, isComplete } = taskDetails;
+  const { _id, title, description, dueDate, isComplete } = taskDetails;
 
   const formattedDueDate = format(new Date(dueDate), 'MM/dd/yyyy');
 
   const overdue = !isComplete && dueDate < new Date().toISOString();
 
   return (
-    <div className="task-row">
-      <div className="task-title">
+    <tr className="tasks-table-row">
+      <td>
         <GoCheck
           className={`check-icon ${isComplete && 'complete-check-icon'}`}
           onClick={() => onTaskCompleteToggle(taskDetails)}
         />
+      </td>
+      <td className="tasks-table-title">
         <Link href={`/tasks/${_id}`}>
-          <a>
-            <h3 className={isComplete ? 'task-title-complete' : undefined}>
-              {title}
-              {overdue && <span className="task-overdue">overdue</span>}
-              <span className={isComplete ? 'line' : undefined}></span>
-            </h3>
+          <a className={isComplete ? 'tasks-table-title-complete' : undefined}>
+            {title}
+            {overdue && <span className="tasks-table-overdue">overdue</span>}
+            <span className={isComplete ? 'line' : undefined}></span>
           </a>
         </Link>
-      </div>
-      <p className={`task-due-date ${overdue && 'date-overdue'}`}>
-        {formattedDueDate}
-      </p>
-      <Link href={`/tasks/${_id}`}>
-        <a>
-          <FaPencilAlt className="task-icon" />
-        </a>
-      </Link>
-      <FaTrashAlt onClick={() => onTaskDelete(_id)} className="task-icon" />
-    </div>
+      </td>
+      <td className="tasks-table-description">
+        {description.substring(0, 20) + '...'}
+      </td>
+      <td className="tasks-table-due-date">{formattedDueDate}</td>
+      <td className="tasks-table-icons">
+        <Link href={`/tasks/${_id}`}>
+          <a>
+            <FaPencilAlt className="tasks-table-icon" />
+          </a>
+        </Link>
+        <FaTrashAlt
+          onClick={() => onTaskDelete(_id)}
+          className="tasks-table-icon"
+        />
+      </td>
+    </tr>
   );
 };
 

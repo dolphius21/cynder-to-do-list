@@ -17,13 +17,13 @@ export const getStaticPaths = async () => {
 
   const paths = data.map((task) => {
     return {
-      params: { id: task._id }
+      params: { id: task._id },
     };
   });
 
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
 
@@ -37,7 +37,7 @@ export const getStaticProps = async (context) => {
   });
 
   return {
-    props: { details }
+    props: { details },
   };
 };
 

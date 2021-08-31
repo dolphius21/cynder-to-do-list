@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import TasksList from '../components/TasksList';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import TaskListForm from '../components/TaskListForm';
 import fakeTasks from '../services/fakeTaskService';
+import TaskTable from '../components/TaskTable';
 
 export default function Home() {
   const [tasks, setTasks] = useState(fakeTasks);
@@ -26,6 +26,11 @@ export default function Home() {
     const index = tasksCopy.indexOf(task);
     tasksCopy[index] = { ...task, isComplete: !task.isComplete };
     setTasks(tasksCopy);
+  };
+
+  const handleCompletedTaskDelete = () => {
+    const filteredTasks = tasks.filter((t) => t.isComplete === false);
+    setTasks(filteredTasks);
   };
 
   const handleChangeFilterType = (filterType) => {
@@ -53,11 +58,12 @@ export default function Home() {
       </Head>
       <Header />
       <TaskListForm onAddTask={handleAddTask} />
-      <TasksList
+      <TaskTable
         tasks={filteredTasks}
         onTaskDelete={handleTaskDelete}
         onTaskCompleteToggle={handleTaskCompleteToggle}
         onChangeFilterType={handleChangeFilterType}
+        onCompletedTaskDelete={handleCompletedTaskDelete}
       />
     </div>
   );
