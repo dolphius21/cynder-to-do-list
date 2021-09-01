@@ -23,7 +23,6 @@ const SingleTodo = ({ todoDetails, onTodoDelete, onTodoCompleteToggle }) => {
           <a className={isComplete ? 'todos-table-title-complete' : undefined}>
             {title}
             {overdue && <span className="todos-table-overdue">overdue</span>}
-            <span className={isComplete ? 'line' : undefined}></span>
           </a>
         </Link>
       </td>

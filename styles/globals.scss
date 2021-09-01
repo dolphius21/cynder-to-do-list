@@ -230,13 +230,6 @@ input {
       display: flex;
       color: $light-neutral-clr-1;
       position: relative;
-      .line {
-        position: absolute;
-        display: block;
-        top: 16px;
-        border-bottom: 1px solid $light-neutral-clr-3;
-        width: 100%;
-      }
     }
   }
   .todos-table-title-complete {
@@ -405,6 +398,12 @@ input {
   }
 }
 /* Loader Styles */
+.loader-container {
+  display: grid;
+  place-items: center;
+  height: 250px;
+  width: 100%;
+}
 .spinner {
   animation: rotator 1.4s linear infinite;
   .path {

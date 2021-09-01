@@ -5,6 +5,8 @@ import Header from '../components/Header';
 import TodoListForm from '../components/TodoListForm';
 import TodosTable from '../components/TodosTable';
 import { createTodo, getTodos, deleteTodo } from './api/todos';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -21,12 +23,20 @@ export default function Home() {
 
   const handleAddTodo = (newTodo) => {
     createTodo(newTodo).then((res) => setTodos([...todos, res.data]));
+    toast('Todo successfully added!', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   };
 
   const handleTodoDelete = (id) => {
     deleteTodo(id);
     const filteredTodos = todos.filter((t) => t.id !== id);
     setTodos(filteredTodos);
+    toast('Todo successfully deleted!', {
+      position: 'top-center',
+      autoClose: 2000,
+    });
   };
 
   const handleTodoCompleteToggle = (todo) => {
@@ -67,10 +77,11 @@ export default function Home() {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <ToastContainer />
       <Header />
       <TodoListForm onAddTodo={handleAddTodo} />
       {loading ? (
-        <div className="container">
+        <div className="loader-container">
           <Loader />
         </div>
       ) : (
