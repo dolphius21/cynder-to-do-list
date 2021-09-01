@@ -5,19 +5,15 @@ import { parseISO } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../components/Header';
-import fakeTodos from '../../services/fakeTodosService';
 import Button from '../../components/Button';
+import { getTodoById, getTodos } from '../api/todos';
 
 export const getStaticPaths = async () => {
-  const data = await new Promise((res, rej) => {
-    setTimeout(() => {
-      res(fakeTodos);
-    });
-  }, 500);
+  const { data } = await getTodos();
 
   const paths = data.map((todo) => {
     return {
-      params: { id: todo.id },
+      params: { id: `${todo.id}` },
     };
   });
 
@@ -29,15 +25,16 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async (context) => {
   const id = context.params.id;
-  const details = await new Promise((res, rej) => {
-    setTimeout(() => {
-      const result = fakeTodos.find((todo) => todo.id === id);
-      res(result);
-    }, 500);
-  });
-
+  let data = {};
+  let error = {};
+  try {
+    const res = await getTodoById(id);
+    data = res.data;
+  } catch (e) {
+    error = e;
+  }
   return {
-    props: { details },
+    props: { details: data, error },
   };
 };
 

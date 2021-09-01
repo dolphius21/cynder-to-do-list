@@ -1,19 +1,26 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import Loader from '../components/Loader';
 import Header from '../components/Header';
 import TodoListForm from '../components/TodoListForm';
-import fakeTodos from '../services/fakeTodosService';
 import TodosTable from '../components/TodosTable';
+import { createTodo, getTodos } from './api/todos';
 
 export default function Home() {
-  const [todos, setTodos] = useState(fakeTodos);
+  const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [filterType, setFilterType] = useState('all');
 
-  const handleAddTodo = (todo) => {
-    const todosCopy = [...todos];
-    setTodos([...todosCopy, todo]);
+  useEffect(() => {
+    setLoading(true);
+    getTodos()
+      .then((res) => setTodos(res.data))
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+  const handleAddTodo = (newTodo) => {
+    createTodo(newTodo).then((res) => setTodos([...todos, res.data]));
   };
 
   const handleTodoDelete = (id) => {
@@ -60,14 +67,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <TodoListForm onAddTask={handleAddTodo} />
-      <TodosTable
-        todos={filteredTodos}
-        onTodoDelete={handleTodoDelete}
-        onTodoCompleteToggle={handleTodoCompleteToggle}
-        onChangeFilterType={handleChangeFilterType}
-        onCompletedTodosDelete={handleCompletedTodosDelete}
-      />
+      <TodoListForm onAddTodo={handleAddTodo} />
+      {loading ? (
+        <div className="container">
+          <Loader />
+        </div>
+      ) : (
+        <TodosTable
+          todos={filteredTodos}
+          onTodoDelete={handleTodoDelete}
+          onTodoCompleteToggle={handleTodoCompleteToggle}
+          onChangeFilterType={handleChangeFilterType}
+          onCompletedTodosDelete={handleCompletedTodosDelete}
+        />
+      )}
     </div>
   );
 }

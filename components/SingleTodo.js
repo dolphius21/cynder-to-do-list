@@ -28,7 +28,7 @@ const SingleTodo = ({ todoDetails, onTodoDelete, onTodoCompleteToggle }) => {
         </Link>
       </td>
       <td className="todos-table-description">
-        {description.substring(0, 20) + '...'}
+        <div className="todos-table-description-text">{description}</div>
       </td>
       <td className="todos-table-due-date">{formattedDueDate}</td>
       <td className="todos-table-icons">

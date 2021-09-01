@@ -5,24 +5,27 @@ import 'react-datepicker/dist/react-datepicker.css';
 import Button from './Button';
 
 const TodoListForm = ({ onAddTodo }) => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [due_date, setDueDate] = useState('');
+  const DEFAULT_VALUES = { title: '', due_date: '', description: '' };
+
+  const [values, setValues] = useState(DEFAULT_VALUES);
+
+  const { title, description, due_date } = values;
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
-      id: new Date().toISOString(),
       title,
       description,
       due_date: new Date(due_date).toISOString(),
-      isComplete: false,
     };
     onAddTodo(newTodo);
-    setTitle('');
-    setDescription('');
-    setDueDate('');
+    setValues(DEFAULT_VALUES);
   };
+
+  const setFieldValue = (field, value) =>
+    setValues({ ...values, [field]: value });
+
+  console.log('vvv', values);
 
   return (
     <div className="card">
@@ -33,7 +36,7 @@ const TodoListForm = ({ onAddTodo }) => {
               type="text"
               className="input-field"
               placeholder="Add a new todo..."
-              onChange={(e) => setTitle(e.target.value)}
+              onChange={(e) => setFieldValue('title', e.target.value)}
               value={title}
               required
             />
@@ -43,8 +46,8 @@ const TodoListForm = ({ onAddTodo }) => {
             <DatePicker
               className="input-date"
               selected={due_date}
-              placeholderText={format(new Date(), 'MM/dd/yyyy')}
-              onChange={(date) => setDueDate(date)}
+              placeholderText="Select date..."
+              onChange={(date) => setFieldValue('due_date', date)}
               id="input-date"
             />
             <label className="input-label">Due Date</label>
@@ -62,7 +65,7 @@ const TodoListForm = ({ onAddTodo }) => {
               <textarea
                 rows="2"
                 placeholder="Add a todo description..."
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={(e) => setFieldValue('description', e.target.value)}
                 value={description}
               ></textarea>
             </div>
