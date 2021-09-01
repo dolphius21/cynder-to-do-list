@@ -40,8 +40,6 @@ export const getStaticProps = async (context) => {
   };
 };
 
-const [updatingIds, setUpdatingIds] = useState([]);
-
 const TodoDetails = ({ details }) => {
   const [values, setValues] = useState({
     id: details.id,
