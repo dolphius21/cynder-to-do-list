@@ -4,7 +4,7 @@ import Loader from '../components/Loader';
 import Header from '../components/Header';
 import TodoListForm from '../components/TodoListForm';
 import TodosTable from '../components/TodosTable';
-import { createTodo, getTodos } from './api/todos';
+import { createTodo, getTodos, deleteTodo } from './api/todos';
 
 export default function Home() {
   const [todos, setTodos] = useState([]);
@@ -24,6 +24,7 @@ export default function Home() {
   };
 
   const handleTodoDelete = (id) => {
+    deleteTodo(id);
     const filteredTodos = todos.filter((t) => t.id !== id);
     setTodos(filteredTodos);
   };

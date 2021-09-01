@@ -25,8 +25,6 @@ const TodoListForm = ({ onAddTodo }) => {
   const setFieldValue = (field, value) =>
     setValues({ ...values, [field]: value });
 
-  console.log('vvv', values);
-
   return (
     <div className="card">
       <form className="form" onSubmit={handleSubmit}>

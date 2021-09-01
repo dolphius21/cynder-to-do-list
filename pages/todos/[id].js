@@ -1,12 +1,12 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Head from 'next/head';
-import { parseISO } from 'date-fns';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import Header from '../../components/Header';
 import Button from '../../components/Button';
-import { getTodoById, getTodos } from '../api/todos';
+import { getTodoById, getTodos, updateTodoById } from '../api/todos';
 
 export const getStaticPaths = async () => {
   const { data } = await getTodos();
@@ -39,11 +39,31 @@ export const getStaticProps = async (context) => {
 };
 
 const TodoDetails = ({ details }) => {
-  const [title, setTitle] = useState(details.title);
-  const [description, setDescription] = useState(details.description);
-  const [due_date, setDueDate] = useState(parseISO(details.due_date));
+  const [values, setValues] = useState({
+    id: details.id,
+    title: details.title,
+    description: details.description,
+    due_date: new Date(details.due_date),
+  });
 
-  const overdue = details.due_date < new Date().toISOString();
+  const router = useRouter();
+
+  const { title, description, due_date } = values;
+
+  const setFieldValue = (field, value) =>
+    setValues({ ...values, [field]: value });
+
+  const handleTodoUpdate = (e) => {
+    e.preventDefault();
+    console.log('request body =========>', values);
+    updateTodoById(values.id, {
+      title,
+      description,
+      due_date,
+    }).then((res) => router.push('/'));
+  };
+
+  const overdue = due_date < new Date().toISOString();
 
   return (
     <div className="container">
@@ -54,14 +74,14 @@ const TodoDetails = ({ details }) => {
       </Head>
       <Header />
       <div className="card">
-        <div className="todo-form">
+        <form className="todo-form" onSubmit={handleTodoUpdate}>
           <Link href="/">
             <a>Back to todo list...</a>
           </Link>
           <input
             type="text"
             className="todo-form-title"
-            onChange={(e) => setTitle(e.target.value)}
+            onChange={(e) => setFieldValue('title', e.target.value)}
             value={title}
             required
           />
@@ -91,7 +111,7 @@ const TodoDetails = ({ details }) => {
             <DatePicker
               className="todo-form-due-date-picker"
               selected={due_date}
-              onChange={(date) => setDueDate(date)}
+              onChange={(date) => setFieldValue('due_date', date)}
             />
             {overdue && <p>Overdue</p>}
           </div>
@@ -99,7 +119,7 @@ const TodoDetails = ({ details }) => {
             <textarea
               rows="3"
               placeholder="todo description..."
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={(e) => setFieldValue('description', e.target.value)}
               value={description}
             ></textarea>
           </div>
@@ -108,7 +128,7 @@ const TodoDetails = ({ details }) => {
               Save Todo
             </Button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
