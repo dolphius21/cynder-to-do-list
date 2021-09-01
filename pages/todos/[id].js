@@ -17,7 +17,7 @@ export const getStaticPaths = async () => {
 
   const paths = data.map((todo) => {
     return {
-      params: { id: todo._id },
+      params: { id: todo.id },
     };
   });
 
@@ -31,7 +31,7 @@ export const getStaticProps = async (context) => {
   const id = context.params.id;
   const details = await new Promise((res, rej) => {
     setTimeout(() => {
-      const result = fakeTodos.find((todo) => todo._id === id);
+      const result = fakeTodos.find((todo) => todo.id === id);
       res(result);
     }, 500);
   });
@@ -44,9 +44,9 @@ export const getStaticProps = async (context) => {
 const TodoDetails = ({ details }) => {
   const [title, setTitle] = useState(details.title);
   const [description, setDescription] = useState(details.description);
-  const [dueDate, setDueDate] = useState(parseISO(details.dueDate));
+  const [due_date, setDueDate] = useState(parseISO(details.due_date));
 
-  const overdue = details.dueDate < new Date().toISOString();
+  const overdue = details.due_date < new Date().toISOString();
 
   return (
     <div className="container">
@@ -93,7 +93,7 @@ const TodoDetails = ({ details }) => {
             <p>Due date:</p>
             <DatePicker
               className="todo-form-due-date-picker"
-              selected={dueDate}
+              selected={due_date}
               onChange={(date) => setDueDate(date)}
             />
             {overdue && <p>Overdue</p>}

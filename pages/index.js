@@ -17,7 +17,7 @@ export default function Home() {
   };
 
   const handleTodoDelete = (id) => {
-    const filteredTodos = todos.filter((t) => t._id !== id);
+    const filteredTodos = todos.filter((t) => t.id !== id);
     setTodos(filteredTodos);
   };
 
@@ -45,7 +45,7 @@ export default function Home() {
       return todo.isComplete === true;
     }
     if (filterType === 'overdue') {
-      return !todo.isComplete && todo.dueDate < new Date().toISOString();
+      return !todo.isComplete && todo.due_date < new Date().toISOString();
     }
   });
 

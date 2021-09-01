@@ -7,15 +7,15 @@ import Button from './Button';
 const TodoListForm = ({ onAddTodo }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [due_date, setDueDate] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newTodo = {
-      _id: new Date().toISOString(),
+      id: new Date().toISOString(),
       title,
       description,
-      dueDate: new Date(dueDate).toISOString(),
+      due_date: new Date(due_date).toISOString(),
       isComplete: false,
     };
     onAddTodo(newTodo);
@@ -42,7 +42,7 @@ const TodoListForm = ({ onAddTodo }) => {
           <div className="form-group">
             <DatePicker
               className="input-date"
-              selected={dueDate}
+              selected={due_date}
               placeholderText={format(new Date(), 'MM/dd/yyyy')}
               onChange={(date) => setDueDate(date)}
               id="input-date"
